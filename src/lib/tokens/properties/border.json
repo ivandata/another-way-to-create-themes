@@ -1,0 +1,23 @@
+{
+  "border": {
+    "element": {
+      "01": {
+        "value": "1px solid"
+      },
+      "02": {
+        "value": "2px solid"
+      }
+    },
+    "radius": {
+      "s": {
+        "value": "6px"
+      },
+      "m": {
+        "value": "10px"
+      },
+      "l": {
+        "value": "14px"
+      }
+    }
+  }
+}

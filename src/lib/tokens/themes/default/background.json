@@ -1,0 +1,16 @@
+{
+  "color": {
+    "background": {
+      "page": {
+        "primary": {
+          "value": "#f9f8f6"
+        }
+      },
+      "container": {
+        "primary": {
+          "value": "#FFFFFF"
+        }
+      }
+    }
+  }
+}
