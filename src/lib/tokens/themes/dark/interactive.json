@@ -1,0 +1,21 @@
+{
+  "color": {
+    "interactive": {
+      "default": {
+        "value": "#D84727"
+      },
+      "hover": {
+        "value": "#bbff00"
+      },
+      "focus": {
+        "value": "#d82a27"
+      },
+      "active": {
+        "value": "#d82a27"
+      },
+      "above": {
+        "value": "#FFF"
+      }
+    }
+  }
+}

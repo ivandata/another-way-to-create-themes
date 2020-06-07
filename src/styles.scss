@@ -1,0 +1,55 @@
+@import './lib/themes.scss';
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  font-size: 20px;
+  line-height: 1.6;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  transition-property: background-color;
+  transition-timing-function: ease-out;
+  transition-duration: 0.3s;
+  background-color: var(--color-background-page-primary);
+  color: var(--color-text-primary);
+}
+
+a {
+  color: var(--color-link-default);
+
+  &:visited {
+    color: var(--color-link-visited);
+  }
+
+  &:hover {
+    color: var(--color-link-hover);
+  }
+}
+
+button {
+  cursor: pointer;
+  outline: none;
+  border-radius: var(--border-radius-m);
+  padding: var(--spacing-content-03) var(--spacing-content-05);
+  background-color: var(--color-interactive-default);
+  border: var(--border-element-02) var(--color-interactive-default);
+  color: var(--color-interactive-above);
+
+  &:hover {
+    background-color: var(--color-interactive-hover);
+    border-color: var(--color-interactive-hover);
+  }
+
+  &:active {
+    background-color: var(--color-interactive-active);
+    border-color: var(--color-interactive-active);
+  }
+
+  &:focus {
+    border-color: var(--color-interactive-focus);
+  }
+}

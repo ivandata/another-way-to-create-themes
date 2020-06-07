@@ -1,0 +1,12 @@
+{
+  "color": {
+    "text": {
+      "primary": {
+        "value": "#f6ffe9"
+      },
+      "inverse": {
+        "value": "#ffffff"
+      }
+    }
+  }
+}

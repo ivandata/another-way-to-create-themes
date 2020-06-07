@@ -1,34 +1,20 @@
-const { readdirSync, writeFileSync, existsSync, mkdirSync } = require('fs');
+const { readdirSync, writeFileSync, existsSync, mkdirSync, rmdirSync } = require('fs');
 const StyleDictionary = require('style-dictionary');
 
 const baseDir = `${__dirname}/tokens`;
 const distDir = `${__dirname}/dist`;
 
-// Create dist folder if not exist
-if (!existsSync(distDir)){
-  mkdirSync(distDir);
+// Remove and create dist folder
+if (existsSync(distDir)){
+  rmdirSync(distDir, { recursive: true });
 }
+
+mkdirSync(distDir);
 
 // Style dictionary format https://amzn.github.io/style-dictionary/#/api?id=registerformat
 StyleDictionary.registerFormat({
   name: 'json/flat',
   formatter: (dictionary) => JSON.stringify(dictionary.allProperties, null, 2)
-});
-
-// Add a custom transform to the Style Dictionary Transforms can manipulate a property's name, value, or attributes
-// https://amzn.github.io/style-dictionary/#/api?id=registertransform
-StyleDictionary.registerTransform({
-  name: 'size/pxToPt',
-  type: 'value',
-  matcher: (prop) => prop.value.match(/^[\d.]+px$/),
-  transformer: (prop) => prop.value.replace(/px$/, 'pt')
-});
-
-StyleDictionary.registerTransform({
-  name: 'size/pxToDp',
-  type: 'value',
-  matcher: (prop) => prop.value.match(/^[\d.]+px$/),
-  transformer: (prop) => prop.value.replace(/px$/, 'dp')
 });
 
 // Add a custom transformGroup to the Style Dictionary, which is a group of transforms.

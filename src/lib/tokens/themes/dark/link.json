@@ -1,0 +1,15 @@
+{
+  "color": {
+    "link": {
+      "default": {
+        "value": "#D84727"
+      },
+      "hover": {
+        "value": "#bbff00"
+      },
+      "visited": {
+        "value": "#f6ffe9"
+      }
+    }
+  }
+}

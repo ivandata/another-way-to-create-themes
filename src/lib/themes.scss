@@ -1,0 +1,20 @@
+:root {
+  @import './dist/tokens-map';
+  @each $name, $value in $tokens {
+    --#{$name}: #{$value};
+  }
+}
+
+:root {
+  @import './dist/default/tokens-map';
+  @each $name, $value in $tokens {
+    --#{$name}: #{$value};
+  }
+}
+
+[data-theme='dark'] {
+  @import './dist/dark/tokens-map';
+  @each $name, $value in $tokens {
+    --#{$name}: #{$value};
+  }
+}
