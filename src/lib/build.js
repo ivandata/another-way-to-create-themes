@@ -1,5 +1,8 @@
 const { readdirSync, writeFileSync, existsSync, mkdirSync, rmdirSync } = require('fs');
 const StyleDictionary = require('style-dictionary');
+const render = require('json-templater/string');
+const prettier = require('prettier');
+const path = require('path');
 
 const baseDir = `${__dirname}/tokens`;
 const distDir = `${__dirname}/dist`;
@@ -29,10 +32,7 @@ const themes = readdirSync(`${baseDir}/themes/`, { withFileTypes: true })
   .filter(dir => dir.isDirectory())
   .map(dir => dir.name);
 
-// Save theme names in json file
-writeFileSync(`${distDir}/themes.json`, JSON.stringify({
-  themes: themes
-}));
+createFiles(themes);
 
 // Build properties
 StyleDictionary.extend(getConfig()).buildPlatform('web/scss');
@@ -40,6 +40,51 @@ StyleDictionary.extend(getConfig()).buildPlatform('web/scss');
 themes.map(function (theme) {
   StyleDictionary.extend(getConfig(theme)).buildPlatform('web/scss');
 });
+
+function createFiles(themes) {
+  // Save theme names in json file
+  writeFileSync(`${distDir}/themes.json`, JSON.stringify({
+    themes: themes
+  }));
+
+  const themeImport = `[data-theme='{{theme}}'] {
+      @import './{{theme}}/tokens-map';
+      @each $name, $value in $tokens {
+        --#{$name}: #{$value};
+      }
+    }`;
+
+  const themesTemplate = [];
+  themes.forEach(t => {
+    themesTemplate.push(
+      render(themeImport, {
+        theme: t
+      })
+    );
+  });
+
+  const template = `
+    :root {
+      @import './tokens-map';
+      @each $name, $value in $tokens {
+        --#{$name}: #{$value};
+      }
+    }
+
+    {{themes}}
+  `;
+
+  const content = render(template, {
+    themes: themesTemplate.join(' ')
+  });
+
+  const prettierOptions = {
+    parser: 'scss',
+    singleQuote: true
+  };
+  // Save themes in scss file
+  writeFileSync(path.join(distDir, `themes.scss`), prettier.format(content, prettierOptions));
+}
 
 // https://amzn.github.io/style-dictionary/#/config
 function getConfig(theme = false) {

@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "npm run tokens && vue-cli-service serve",
+    "build": "npm run tokens && vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "tokens": "node src/lib/build.js"
+    "tokens": "node src/lib/build.js",
+    "watch": "npm run tokens && chokidar \"src/lib/tokens/**/*.json\" -c \"npm run tokens\""
   },
   "dependencies": {
     "core-js": "^3.6.5",
@@ -17,8 +18,11 @@
     "@vue/cli-plugin-eslint": "^4.4.0",
     "@vue/cli-service": "^4.4.0",
     "babel-eslint": "^10.1.0",
+    "chokidar-cli": "^2.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "json-templater": "^1.2.0",
+    "prettier": "^2.0.5",
     "sass": "^1.26.8",
     "sass-loader": "^8.0.2",
     "style-dictionary": "^2.10.0",
